@@ -52,6 +52,7 @@ Page({
       name: 'login',
       data: {},
       success: res => {
+        console.log("获取云函数调用结果",res)
         console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
         wx.navigateTo({
@@ -116,5 +117,21 @@ Page({
       }
     })
   },
+  optionDbFunction: function(){
+    wx.cloud.callFunction({
+      name:'db',
+      data:{
+        a:1,
+        b:2
+      },
+      success:function(res){
+        console.log(res.result)
+      },
+      fail:function(res){
+        console.log(res)
+      }
+    }
+    )
+  }
 
 })
